@@ -199,3 +199,51 @@ in a promise and returns promise
     - If first settled promise results in an error it won't return the error it ignores it
     - It waits for the first succesfully settled promise
     - what if all the promises failed? the return result will be an AggregatedError [err1, err2, err3]
+
+
+# Prototype & Prototypal Inheritance
+- One object inheriting properties and methods of another object is Prototypal Inheritance
+- Attaching a object to whatever we create like array, object, function, string, each of these will have some properties and methods that we can access by using dot operator
+- let's consider arr as an array
+    - arr.__proto__ --> Array.prototype
+    - arr.__proto__.__proto__ --> Object.prototype
+    - arr.__proto__.__proto__.__proto__ --> null  --> end of prototype chain
+- Everything in JS (Array, String, Function, Object) is a Object
+
+# Async & Differ Attributes
+- Async and Differ are boolean attributes which are used along with script tags to load the external scripts efficiently into our web page
+    - <script src=""> --> HTML parsing stops as soon as script tag is encountered and fetches that script and executes it and then html parsing starts back
+    - <script async> --> scripts are fetched asynchronously while HTML parsing happening and once the script is fetched parsing stops and executes the script and coninues parsing
+    - <script defer> --> scripts are fetched asynchronously while HTML parsing continues and once the HTML parsing is completed then scripts are executed
+    - Async tag doesn't guarantee the order of execution of scripts, if we have scripts dependent on each other then Async tag won't work. We should use "Defer".
+    - Suppose we have scripts that are independent (like Google Analytics, any other 3rd party scripts) of our code we can use "Async" attribute
+
+# CORS - (Cross Origin Resource Sharing)
+    - CORS is a mechanism which uses additional HTTP Headers to tell the browser whether a specific web app can share the resources with another web app
+    - Both the Web Apps should have different origin. If they have same origin it is easy to share resources
+    - If web apps have different origins then they need to follow CORS Mechanism
+    - Before CORS mechanism, data from different Domains, SubDomains, different ports and differnet protocols (http, https) are not allowed
+    - CORS Mechanism is a Web Standard that allows resource sharing in large scale web applications with Microservices architecture.
+    - Suppose we have Domain1 and Domain2, Domain1 needs to post something to Domain2
+    - Browser will make a Pre-Flight call (also called as OPTIONS call) to Domain2 before making actual call and Domain2 takes the responsibility of verifying whether this call is valid or not
+    - If the call is valid then Domain2 sets some additional Headers and let the Client (Browser/Domain1) know that this is safe and then the Actual call is made
+    - HTTP Headers
+        - Access-Control-Allow-Origin : * --> Any Domain outside of that domain can access it
+        - Access-Control-Allow-Methods --> we can restrict methods like GET, PUT, DELETE, POST
+
+# Event Bubbling, Event Capturing (Event Trickling)
+- Event Bubbling, event propagates upwards from child to parent (If we click on child, propagates child --> parent)
+- Event Capturing is opposite, event propagates downwards from parent to child (If we click on child, propagates parent --> child)
+
+# Event Delegation
+- It is a technique to handle events in our web page in best possible way
+- Event Delegation is a technique that utilizes Event Bubbling
+- Using Event Delegation is a major Performance Improvement for our web page
+- Instead of attaching the Event Handlers to all the elements (which eventually affects the performance) we can attach the event handler to the Parent Element of all the children this technique is Event Delegation
+- PROS
+    - Improves Memory eventually improves performance, because we attach a single event handler on parent
+    - Writing less code
+    - DOM Manipulation (If we have like infinite scrolling and the new childs gets added we don't need to add the event handlers to the newly added children)
+- CONS/Limitations
+    - All the events are not bubled up (events like blur, focus, resizing a window, scrolling)
+    - If we use stopPropagation on any of the child element then Event Bubbling stops
