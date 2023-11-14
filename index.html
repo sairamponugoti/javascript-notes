@@ -7,27 +7,27 @@
 </head>
 <body>
     <script>
-        class Person {
-            constructor(name) {
-                this.name = name
-            }
+        // class Person {
+        //     constructor(name) {
+        //         this.name = name
+        //     }
 
-            printNameArrow() {
-                setTimeout(() => {
-                    console.log(`Arrow: ${this.name}`)
-                })
-            }
+        //     printNameArrow() {
+        //         setTimeout(() => {
+        //             console.log(`Arrow: ${this.name}`)
+        //         })
+        //     }
 
-            printNameFunction() {
-                setTimeout(function() {
-                    console.log(`Normal: ${this.name}`)
-                })
-            }
-        }
+        //     printNameFunction() {
+        //         setTimeout(function() {
+        //             console.log(`Normal: ${this.name}`)
+        //         })
+        //     }
+        // }
 
-        const person = new Person('sai')
-        person.printNameArrow()
-        person.printNameFunction()
+        // const person = new Person('sai')
+        // person.printNameArrow()
+        // person.printNameFunction()
 
 //         Array.prototype.mapPoly = (cb) => {
 //     const mappedArr = [];
@@ -41,24 +41,50 @@
 // const arr1 = [1,2,3,4];
 
 // const arr2 = arr1.mapPoly((item) => 2*item)
-        const numbers = {
-        numberA: 5,
-        numberB: 10,
+        // const numbers = {
+        // numberA: 5,
+        // numberB: 10,
 
-        sum: function() {
-            console.log(this === numbers); // => true
+        // sum: function() {
+        //     console.log(this === numbers); // => true
 
-            function calculate() {
-            // this is window or undefined in strict mode
-            console.log(this === numbers); // => false
-            return this.numberA + this.numberB;
-            }
+        //     function calculate() {
+        //     // this is window or undefined in strict mode
+        //     console.log(this === numbers); // => false
+        //     return this.numberA + this.numberB;
+        //     }
 
-            return calculate();
+        //     return calculate();
+        // }
+        // };
+
+        // numbers.sum();
+
+        // const prom = new Promise((resolve, reject) => {
+        //     setTimeout(()=> {resolve("promise resolved")},40000)
+        // })
+        const prom = fetch("https://api.github.com/users/sponugoti")
+
+        // const prom2 = new Promise((resolve, reject) => {
+        //     setTimeout(()=> {resolve("promise2 resolved")},20000)
+        // })
+        const prom2 = fetch("https://api.github.com/users/asaini")
+
+        async function handleMultiplePromises() {
+            console.log("Hello world")
+            console.time("prom1")
+            const p1 = await prom;
+            console.timeEnd("prom1")
+            console.log("Namste JS")
+            console.log(await p1.json())
+
+            console.time("prom2")
+            const p2 = await prom2;
+            console.timeEnd("prom2")
+            console.log("namaste js 2")
+            console.log(p2)
         }
-        };
-
-        numbers.sum();
+        handleMultiplePromises()
     </script>
 </body>
 </html>

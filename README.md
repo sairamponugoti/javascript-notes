@@ -172,3 +172,30 @@
 in a promise and returns promise
 - Async and Await combo is used to handle promises
 - await is a keyword that can only be used inside a async function
+- we use await keyword infront of a promise that needs to be resolved
+- Async-Await is basically a syntactical sugar, more readable code
+
+# Promise APIs
+- promise.all([p1,p2,p3])
+    - To handle parallel api calls
+    - Takes in array of promises
+    - It is Fail Fast
+    - Make all the API calls at a time and waits for all of the promises to be resolved and returns array with responses
+    - As soon as one of the promise gets rejected (results in an error) promise.all([p1,p2,p3]) will throw the error, suppose p2 gets rejected it returns error from p2 promise, it doesn't wait for p1, p3 (but they won't get cancelled) but p1, p3 can be resolved but it doesn't matter our promise.all gets rejected.
+    - *** Promises are not cancellable
+
+- promise.allSettled([p1,p2,p3])
+    - waits for all promises to be settled whether they are success or failure(error) it doesn't matter
+    - It returns responses [val1, err2(if p2 errored out), val3]
+
+- promise.race([p1,p2,p3])
+    - suppose p1 takes 3sec, p2 takes 1s, p3 takes 2s
+    - After 1s it gives the value of promise p2
+    - Basically it returns value of first settled promise
+    - What if the first settled promise results in an error? it returns an error as result
+
+- promise.any([p1,p2,p3])
+    - very similar to promise.race() but this will wait for the first succesfully settled promise
+    - If first settled promise results in an error it won't return the error it ignores it
+    - It waits for the first succesfully settled promise
+    - what if all the promises failed? the return result will be an AggregatedError [err1, err2, err3]
