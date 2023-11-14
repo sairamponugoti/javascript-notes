@@ -57,6 +57,19 @@ b(); // TypeError: b is not a function
     b(x) // we can pass function x as argument
 
 
+// Callback Functions
+    function x(y) {
+        // function y is callback function
+    }
+
+    x(function y() {})
+
+    setTimeout(function () { // this function is a callback fn
+        console.log("timer")
+    }, 5000)
+
+    document.getElementById("clickMe").addEventListener("click", function cb() {})
+
 // Arrow Functions
     // Introduced in ES6
     // All the function statements, function expressions can also be created using Arrow functions

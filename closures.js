@@ -115,3 +115,26 @@ function Counter() {
 
 var counter1 = new Counter(); // Because Counter is a CONSTRUCTOR function we need to use "new" Keyword
 counter1.incrementCounter();
+
+
+/* Snippet 6 */
+
+let globalCount = 0;
+
+document.getElementById("clickMe").addEventListener("click", function cb () {
+    console.log("Button CLicked", ++globalCount)
+})
+
+// In the above code we have a globalVarible and there is a chance of overriding it, to protect that we need a closure
+
+function attachEventListener() {
+    let count = 0;
+
+    document.getElementById("clickMe").addEventListener("click", function cb () {
+        console.log("Button CLicked", ++count)
+    })
+
+    // Now the callback fn cb() forms a closure, it will have access to it's Lexical scope
+}
+
+attachEventListener()

@@ -92,3 +92,83 @@
     - Impure Functions
     
     - what is Function Statement vs Function Expression vs Function Declaration ??
+
+# Strict Mode
+- To write secure javascript
+- mistyping a variable name results in an error instead of creating a new global variable
+- deleting a variable or object is not allowed (delete x)
+- "use strict";
+- x=3 // This will cause error because x is not declared
+- variables need to be declared before initializing
+
+# Callback Functions
+- Passing a function as an argument to another function, the function which we pass is called as callback function
+- Callback functions are very powerful in JS, because they give access to asynchronous world to a synchronous single-threaded language
+
+# EventListeners, Garbage Collection & removeEventListeners
+- EventListeners are heavy, they occupy memory. So whenever we don't need them we should remove them
+
+# Event Loop
+- Browser --> JS Engine -> CallStack
+- Browser has lot's of superpowers like localSTorage, timers, url, ability to communicate with servers etc...
+- Inorder for JS Engine to communicate/access these super powers, browsers has WEB APIs
+- WEB APIs
+    - setTimeout()
+    - DOM APIs
+    - fetch()
+    - local storage
+    - console
+    - location
+- Browser wraps all these super powers (WEB APIs) into a GLobal Object called "WINDOW"
+- Event Loop checks the Callback Queue if it finds anything in the queue it pushes to to CallStack to execute that.
+- Suppose we have setTimeout(), the callback fn is registered with a timer, once the timer is finished, callback fn is pushed to CALLBACKQUEUE or TASKQUEUE -->EVENTLOOP (PUSHES CB FN) to --> CALLSTACK 
+- Event Loop constantly monitors the CALLBACK QUEUE AND CALLSTACK
+    - CALLSTACK <---(Push to) EVENTLOOP (Fetches from)<--- CALLBACK QUEUE
+    - In case of Fetch() APIS and Promises there is a High Priority Queue called "MICROTASK QUEUE", callback fns in microtask queue will get higher priority and pushed to callstack for execution first then callback fns in CALLBACK QUEUE will get pushed.
+    - MutationObservers also gets pushed to "MICROTASK QUEUE"
+    - Only after all the tasks in "MICROTASK QUEUE" are finished execution then EventLoop checks the CALLBACK QUEUE
+
+# JS Runtime Environment
+    - To run JS anywhere we need JS Engine, APIs to communicate outside, Event Loop, Callback Queue, microtask queue
+    - Every Browser has all these, browser contains JS runtime environment
+    - Similarly Node.JS also has the JS runtime environment to run any piece of JS code
+    - Node JS can run outside the Browser, Node JS is open source JS Runtime.
+    - SpiderMonkey is the first JS Engine created by the JS creator himself (Brendan Eich)
+    - Firefox - SpiderMonkey, Microsoft Edge - Chakra, Chrome, Node, Deno - V8
+    - High Level code (Human readable) (JS code) ---> JS Engine (eg: V8 written in c++)
+        - JS Engine takes the code and this code goes through 3 steps
+            - Parsing --> Compilation --> Execution
+                - Parsing phase - code converts to TOKENS - Syntax Parser (AST- Abstarct Syntax Parser)
+                - Compilation Phase
+
+# Functional Programming
+- Higher order Functions
+    - A function which takes another function as an input/argument or returns another function is Higher Order Function
+    - First-class functions are JavaScript functions that can behave like variables. They can also be passed as arguments to higher-order functions.
+
+# this keyword in JS
+- https://dmitripavlutin.com/gentle-explanation-of-this-in-javascript/
+
+
+# callback hell & Inversion of control
+- callbacks are the super powerful way to handle asynchronous operations in JS.
+- Issues with callbacks
+    - callback hell - nested callbacks makes code unmaintainable and unreadable - Also called Pyramid of Doom
+    - Inversion of Control - Loosing control of the program because we pause callback function into another function, we are giving control of one function to another
+
+
+# Promises
+- A promise is an object representing the eventual completion or failure of an asynchronous operation
+- Three states Pending | FullFilled | Rejected
+- Promise returns promise object and the promise objects are immutable.
+- Promise chanining helps us getting out of Callback hell
+- promises call the callback fn automatically once it returns and we have control back. It will call the callback fn only once
+- Promises resolves Inversion of control issue
+
+# Async-Await
+- Async is a keyword that is used before a function to create Async function
+- Async function always returns a promise
+- we can either return a promise explicitly or if we return a normal value then async function wraps it 
+in a promise and returns promise
+- Async and Await combo is used to handle promises
+- await is a keyword that can only be used inside a async function
